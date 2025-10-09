@@ -23,7 +23,7 @@ http.createServer((req, res) => {
   else if (req.url === '/contact') filePath = './contact.html';
   else filePath = './404.html';
 
-  fs.readFile('./header.html', 'utf8', (err, headerData) => {
+  fs.readFile(path.join(__dirname, 'header.html'), 'utf8', (err, headerData) => {
     if (err) {
       res.writeHead(500, { 'Content-Type': 'text/plain' });
       return res.end('Error loading header.');
