@@ -1,0 +1,10 @@
+{
+  "name": "node_info",
+  "version": "1.0.0",
+  "description": "A minimal Node.js web application.",
+  "main": "index.js",
+  "author": "jomcbob",
+  "scripts": {
+    "start": "node index.js"
+  }
+}
