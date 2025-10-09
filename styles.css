@@ -1,0 +1,49 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  text-transform: uppercase;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover,
+a:focus {
+  color: rgb(126, 116, 116);
+  text-decoration: underline;
+}
+
+h3 {
+  font-size: 2rem;
+  margin: 0;
+    font-weight: lighter;
+}
+
+hr {
+  margin: 0px 25px;
+}
+
+.links {
+  display: flex;
+  gap: 20px;
+  font-size: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.content {
+  flex: 1;
+  margin: 20px;
+}
