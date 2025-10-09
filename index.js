@@ -3,8 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 http.createServer((req, res) => {
-
-    if (req.url.endsWith('.css')) {
+  if (req.url.endsWith('.css')) {
     const cssPath = path.join(__dirname, req.url);
     fs.readFile(cssPath, 'utf8', (err, data) => {
       if (err) {
@@ -18,27 +17,28 @@ http.createServer((req, res) => {
   }
 
   let filePath = '';
-  if (req.url === '/') filePath = './index.html';
-  else if (req.url === '/about') filePath = './about.html';
-  else if (req.url === '/contact') filePath = './contact.html';
-  else filePath = './404.html';
+  if (req.url === '/') filePath = path.join(__dirname, 'index.html');
+  else if (req.url === '/about') filePath = path.join(__dirname, 'about.html');
+  else if (req.url === '/contact') filePath = path.join(__dirname, 'contact.html');
+  else filePath = path.join(__dirname, '404.html');
 
-  fs.readFile(path.join(__dirname, 'header.html'), 'utf8', (err, headerData) => {
+  fs.readFile(filePath, 'utf8', (err, pageData) => {
     if (err) {
       res.writeHead(500, { 'Content-Type': 'text/plain' });
-      return res.end('Error loading header.');
+      return res.end('Error loading page');
     }
 
-    fs.readFile(filePath, 'utf8', (err, pageData) => {
+    fs.readFile(path.join(__dirname, 'header.html'), 'utf8', (err, headerData) => {
       if (err) {
         res.writeHead(500, { 'Content-Type': 'text/plain' });
-        return res.end('Error loading page.');
+        return res.end('Error loading header');
       }
 
+      const finalHtml = pageData.replace('<body>', `<body>\n${headerData}`);
+
       res.writeHead(200, { 'Content-Type': 'text/html' });
-      // write header first, then page body
-      res.write(headerData);
-      res.end(pageData);
+      res.end(finalHtml);
     });
   });
+
 }).listen(8080, () => console.log('Server running on http://localhost:8080'));
